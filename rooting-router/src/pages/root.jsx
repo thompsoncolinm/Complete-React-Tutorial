@@ -1,7 +1,7 @@
 'use client';
 import BlogList from '../components/BlogList';
 import Navbar from '../components/Navbar';
-import useFetch from '../components/useFetch';
+import useFetch from '../hooks/useFetch';
 
 const Home = () => {
     const { data: blogs, isLoading, error } = useFetch('http://localhost:3010/blogs');

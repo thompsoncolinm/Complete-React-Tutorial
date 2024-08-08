@@ -7,6 +7,7 @@ import {
 import "./index.css";
 import Root from "./pages/root";
 import Create from "./pages/create";
+import BlogDetails from "./pages/blogDetails";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
   {
     path: "/create",
     element: <Create />,
+  },
+  {
+    path: "/blog/:id",
+    element: <BlogDetails />,
   },
 ]);
 

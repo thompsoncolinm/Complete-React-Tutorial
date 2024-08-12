@@ -5,12 +5,29 @@ const Create = () => {
     const [ title, setTitle ] = useState('');
     const [ body, setBody ] = useState('');
     const [ author, setAuthor ] = useState('mario');
+    const [ isSubmitting, setIsSubmitting ] = useState(false);
+
+    const handleSumbit = (e) => {
+        e.preventDefault();
+        const blog = { title, body, author };
+
+        setIsSubmitting(true);
+        
+        fetch('http://localhost:3010/blogs', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(blog)
+        }).then(() => {
+            console.log('new blog added');
+            setIsSubmitting(false);
+        })
+    }
 
     return ( 
         <div className="create">
             <Navbar />
             <h2>Add a New Blog</h2>
-            <form>
+            <form onSubmit={handleSumbit}>
                 <input
                     type="text"
                     placeholder="Blog Title"
@@ -30,7 +47,10 @@ const Create = () => {
                     <option value="mario">mario</option>
                     <option value="yoshi">yoshi</option>
                 </select>
-                <button>Add Blog</button>
+                {!isSubmitting &&
+                <button>Add Blog</button> ||
+                <button disabled>Adding blog</button>
+                }
             </form>
         </div>
      );
